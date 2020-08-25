@@ -1,0 +1,21 @@
+service: qr-code-api
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: prod
+  region: eu-central-1
+  apiGateway:
+    binaryMediaTypes:
+      - '*/*'
+
+functions:
+  qr-code-generator:
+    timeout: 6
+    handler: serverless/handler/qr.handler
+    events:
+      - http: 'GET /qr'
+      - http: 'POST /qr'
